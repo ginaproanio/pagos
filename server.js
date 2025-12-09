@@ -133,7 +133,7 @@ app.post('/crear-pago', validarPago, async (req, res) => {
       tip: 0,
       currency: "USD",
       clientTransactionId: "KIOSKO-" + Date.now(),
-      storeId: 1793214995001,
+      storeId: 1711274975001,
       reference: `Pago kiosko - $${amount}`,
       // USAR TELÉFONO DEL COMERCIO (no del cliente)
       phoneNumber: "998842547", // Tu teléfono 0998842547 sin el 0 inicial
