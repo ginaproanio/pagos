@@ -8,8 +8,10 @@ Este documento registra todos los errores encontrados durante las pruebas y desa
 **Categoría**: RESOURCE_NOT_FOUND
 **Status HTTP**: 404
 **Mensaje**: "Lo sentimos, este número no está registrado en Payphone"
-**Descripción**: El teléfono usado no está registrado como probador en PayPhone
+**Descripción técnica**: PayPhone valida el número de teléfono ANTES de generar URL de pasarela
+**Comportamiento observado**: ❌ No aparece pasarela de pago - Error ocurre en fase de creación de transacción
 **Contexto**: Intento de pago en entorno de desarrollo sin números de prueba configurados
+**Explicación**: PayPhone rechaza la transacción en `/api/Sale` antes de crear la URL `payWithCard`
 **Solución implementada**: Agregar el número como probador en panel PayPhone
 **Estado**: DOCUMENTADO - Error esperado en desarrollo
 **Frecuencia**: Alta (cada pago sin números registrados)

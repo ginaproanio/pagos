@@ -88,13 +88,18 @@ Los errores se clasifican en las siguientes categorías para mejor diagnóstico:
 ##### RESOURCE_NOT_FOUND (Categoría: Recurso no encontrado)
 ###### 404 - Número no registrado (errorCode: 120)
 **Mensaje**: "Lo sentimos, este número no está registrado en Payphone"
+**Comportamiento**: ❌ **NO se genera URL de pasarela** - PayPhone rechaza la transacción antes de crear la URL de pago
 **Causa**: El teléfono usado no está registrado como probador en PayPhone
+**Validación**: PayPhone valida el número de teléfono ANTES de procesar cualquier otro dato
 **Solución**:
 - Agregar el número como probador en panel de PayPhone
 - Usar números registrados para pruebas en sandbox
 - Para producción: cualquier número válido funcionará
 **Nota**: Error NORMAL en desarrollo sin probadores configurados
 **Timestamp ejemplo**: 2025-12-09T11:02:33.934Z
+
+**¿Por qué no aparece la pasarela?**
+Este error ocurre en la fase de **creación de transacción** (`/api/Sale`), no en la pasarela de pago. PayPhone valida primero si el número está autorizado antes de generar la URL de pago. Si no está registrado como probador, la API rechaza directamente la solicitud sin crear ninguna URL de redirección.
 
 ##### RATE_LIMIT_ERROR (Categoría: Límite de tasa)
 ###### 429 - Demasiadas solicitudes (errorCode: 130)
