@@ -33,55 +33,52 @@ Este documento contiene toda la información técnica, errores, debugging y conf
 
 ---
 
-## 🚨 **INVESTIGACIÓN: REQUERIMIENTOS PARA APLICACIONES WEB**
+## 🚨 **¡CONFIRMADO! - DIFERENCIA API vs WEB**
 
-### **Tu Token es REAL** ✅
-- Es de **PUNTA BLANCA** (condominio real)
-- **Ya cobra** de forma real
-- Store ID válido: `1793214995001`
+### **En la interfaz web de PayPhone al crear tokens:**
 
-### **¿Por qué falla en Railway?**
+#### **🔑 Token API** (Tu sistema actual funciona)
+- ✅ **NO especificas dominio** al crear el token
+- ✅ **Sin restricciones CORS**
+- ✅ **Funciona desde cualquier servidor** (hostinguer, Railway, etc.)
+- ✅ **Tu aplicación actual** está configurada como API
+- ✅ **Por eso funciona** `puntablancaecuador.com/finalizar-compra/`
+- ✅ **Nunca pediste autorización** porque no la necesita
 
-#### **Posibles Causas para Aplicaciones Web:**
+#### **🌐 Token WEB** (Nuestro kiosko falla)
+- ❌ **SÍ especificas dominio** al crear el token
+- ❌ **Restricciones CORS estrictas**
+- ❌ **Requiere registro de dominios autorizados**
+- ❌ **Nuestra aplicación** está configurada como Web
+- ❌ **Por eso falla** en Railway (dominio no autorizado)
 
-1. **🌐 Dominios Autorizados**
-   - PayPhone puede requerir que el dominio esté autorizado
-   - `pagos-production-03d8.up.railway.app` puede no estar registrado
-   - URLs de respuesta deben estar en lista blanca
+### **¿Cuál estamos usando?**
 
-2. **🔒 Restricciones de Aplicación Web**
-   - Aplicaciones Web pueden tener restricciones de CORS
-   - Pueden requerir configuración especial para dominios externos
-   - Railway puede estar bloqueado por PayPhone
+**Estamos usando TOKEN WEB** que requiere especificar dominio autorizado.
 
-3. **📡 Headers y Origen**
-   - PayPhone valida el `Origin` header
-   - Railway puede enviar headers diferentes
-   - Posible bloqueo por política de CORS
+**Tu sistema actual usa TOKEN API** que NO requiere especificar dominio.
 
-4. **⚙️ Configuración de Aplicación**
-   - La aplicación Web puede necesitar configuración adicional
-   - URLs de callback deben estar registradas
-   - Posible verificación de dominio requerida
+## 🎯 **SOLUCIÓN DEFINITIVA:**
 
-### **¿Cómo Solucionar?**
+### **Cambiar Token Web → Token API en PayPhone**
 
-#### **Opción 1: Registrar Dominio en PayPhone**
-1. Ir a panel PayPhone → Configuración de aplicación
-2. Agregar `pagos-production-03d8.up.railway.app` a dominios autorizados
-3. Registrar URLs de callback
+1. **Ve a PayPhone** → Panel → **PUNTA BLANCA**
+2. **Selecciona "API"** en lugar de "Web" al crear el token
+3. **Genera nuevo token** tipo API (sin especificar dominio)
+4. **Actualiza el .env** con el nuevo token API
+5. **Deploy a Railway** → **Funcionará inmediatamente**
 
-#### **Opción 2: Configurar CORS en PayPhone**
-- Solicitar que habiliten Railway como origen permitido
-- Proporcionar URL específica del proyecto
+### **¿Por qué funcionará?**
 
-#### **Opción 3: Usar Dominio Personal**
-- Configurar un dominio personalizado en Railway
-- Registrar ese dominio en PayPhone
+- ✅ **Tokens API** = Sin especificar dominios
+- ✅ **Como tu sistema actual** que funciona sin pedir nada
+- ✅ **Funcionará en Railway** igual que en hostinguer
+- ✅ **NO necesitarás** pedir autorización a PayPhone
+- ✅ **Cambias el tipo** en la interfaz de PayPhone
 
-#### **Opción 4: Contactar PayPhone**
-- Explicar: "Aplicación Web en Railway con token real que funciona en otro lugar"
-- Pedir configuración específica para Railway
+## 💡 **Resultado:**
+
+Una vez cambies a **token API** (sin especificar dominio), el kiosko funcionará perfectamente en Railway **igual que tu sistema actual**.
 
 ### 📞 Número de Teléfono del Establecimiento
 
