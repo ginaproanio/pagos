@@ -95,48 +95,48 @@ PAYPHONE_TOKEN=tu_token_de_payphone
 **CountryCode**: Siempre "593" para Ecuador
 **Monto**: Se convierte automáticamente a centavos
 
-### ⚠️ REQUISITOS PARA ENTORNO DE PRUEBAS
+### ⚠️ REQUISITOS REALES PAYPHONE - ¡CORREGIDO!
 
-**IMPORTANTE**: Dependiendo del tipo de pago, los requisitos varían.
+**ERROR EN NUESTRA INTERPRETACIÓN**: Pensamos que teléfono era opcional para tarjetas, pero **NO LO ES**.
 
-#### 🎯 Para PAGOS CON TARJETA (como tu kiosko):
+#### 🎯 VERDAD sobre PAGOS CON TARJETA:
 
-**Teléfono y email son OPCIONALES** ✅
-- Solo necesitas enviar el **monto** y **URLs de respuesta**
-- PayPhone genera la pasarela para que el cliente ingrese datos de tarjeta
-- No hay validación de "probadores" para pagos con tarjeta
+**Teléfono y CountryCode SON OBLIGATORIOS** ❌
+- PayPhone requiere información del **CLIENTE que paga**
+- Error 800: "PhoneNumber inválido" + "CountryCode obligatorio"
+- Cliente debe proporcionar su teléfono para validación
 
-**Campos mínimos requeridos:**
-```json
-{
-  "amount": 5000,           // Monto en centavos
-  "currency": "USD",        // Moneda
-  "responseUrl": "...",     // URL de éxito
-  "cancelUrl": "..."        // URL de cancelación
-}
-```
+#### 📱 Tu caso de uso REAL (KIOSKO):
 
-#### 📞 Para PAGOS CON TELÉFONO (si aplicara):
+**❌ CÓDIGO ACTUAL NO FUNCIONA:**
+- Envía solo monto, sin datos del cliente
+- PayPhone rechaza por falta de PhoneNumber/CountryCode
+- **Necesitas pedir teléfono del cliente**
 
-**Teléfono OBLIGATORIO como "probador"** ❌
-- Si envías `phoneNumber`, debe estar registrado en PayPhone
-- Error 404/120 si el teléfono no es probador
-- Solo para pruebas con métodos de pago por teléfono
+**✅ SOLUCIÓN CORRECTA:**
+- Kiosko debe pedir: **edad + teléfono del cliente**
+- Enviar `phoneNumber` y `countryCode` del cliente
+- Para pruebas: teléfono debe estar registrado como "probador"
 
-#### 📱 Tu caso de uso (KIOSKO):
+#### 🔍 ¿Qué pide PayPhone exactamente?
 
-**✅ SOLUCIÓN IMPLEMENTADA:**
-- Código actualizado para **NO enviar teléfono por defecto**
-- Solo envía teléfono si el frontend lo proporciona
-- Para kiosko con tarjeta: **no necesitas teléfono registrado**
-- PayPhone aceptará la transacción sin validación de probadores
+**Para COMERCIO (cobrar):**
+- ✅ Cuenta comercial en PayPhone
+- ✅ Cuenta bancaria enlazada
+- ✅ Credenciales API (Client ID, Secret, Token)
+- ✅ Teléfono del establecimiento (tu 0998842547)
 
-#### 🔍 ¿Por qué funcionará ahora?
+**Para CLIENTE (pagar):**
+- ✅ Teléfono válido del cliente
+- ✅ CountryCode (593 para Ecuador)
+- ✅ Para pruebas: teléfono registrado como "probador"
 
-1. **Sin teléfono enviado**: PayPhone no valida probadores
-2. **Pago con tarjeta**: Cliente ingresa datos en pasarela segura
-3. **Validación automática**: PayPhone procesa con banco
-4. **Confirmación**: Kiosko recibe resultado vía webhook/callback
+#### 📞 Tu teléfono 0998842547:
+
+**NO es para el cliente**, es para el **ESTABLECIMIENTO**
+- Configurar en PayPhone como "teléfono de contacto del comercio"
+- **NO** usarlo como teléfono del cliente pagador
+- Los clientes necesitan **sus propios** teléfonos registrados como probadores
 
 ### URLs de Respuesta
 

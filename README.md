@@ -9,10 +9,11 @@ Este módulo permite procesar pagos automáticos basados en criterios específic
 ### Kiosko de Pago en Condominio
 1. **Residente se acerca** al kiosko touch-screen
 2. **Ingresa su edad** (mayor de 65 años = $50, menor = $100)
-3. **Kiosko calcula monto** automáticamente
-4. **Residente paga** con tarjeta a través de PayPhone
-5. **Sistema confirma** pago exitoso
-6. **Kiosko emite** comprobante o acceso
+3. **Ingresa su teléfono** (10 dígitos, registrado como probador)
+4. **Kiosko calcula monto** automáticamente
+5. **Residente paga** con tarjeta a través de PayPhone
+6. **Sistema confirma** pago exitoso
+7. **Kiosko emite** comprobante o acceso
 
 ## 🚀 Características Principales
 

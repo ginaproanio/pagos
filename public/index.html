@@ -102,9 +102,12 @@
 </head>
 <body>
   <h1>Pago de cuotas - Kiosko Condominio</h1>
-  <p>Ingresa tu edad para calcular el monto automáticamente</p>
+  <p>Ingresa tu edad para calcular el monto y tu teléfono para el pago</p>
 
   <input type="number" id="edad" placeholder="65" min="1" max="120" required>
+  <br><br>
+
+  <input type="tel" id="telefono" placeholder="0999999999" pattern="[0-9]{10}" required>
   <br><br>
 
   <div id="calculo-monto" style="margin: 20px auto; padding: 15px; background-color: #f0f8ff; border-radius: 8px; max-width: 300px; text-align: center; font-size: 16px; display: none;">
@@ -161,11 +164,20 @@
 
     async function iniciarPago() {
       const edadInput = document.getElementById("edad");
+      const telefonoInput = document.getElementById("telefono");
+
       const edad = parseInt(edadInput.value);
+      const telefono = telefonoInput.value.replace(/\D/g, ''); // Solo números
 
       if (!edad || edad <= 0 || edad > 120) {
         alert("Ingresa una edad válida (1-120 años)");
         edadInput.focus();
+        return;
+      }
+
+      if (!telefono || telefono.length !== 10) {
+        alert("Ingresa un teléfono válido de 10 dígitos");
+        telefonoInput.focus();
         return;
       }
 
@@ -176,7 +188,10 @@
       const response = await fetch('/crear-pago', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: monto.toString() })
+        body: JSON.stringify({
+          amount: monto.toString(),
+          phone: telefono
+        })
       });
 
       const data = await response.json();
