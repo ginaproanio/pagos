@@ -108,15 +108,23 @@ PAYPHONE_TOKEN=tu_token_de_payphone
 
 #### 📱 Tu caso de uso REAL (KIOSKO):
 
-**❌ CÓDIGO ACTUAL NO FUNCIONA:**
-- Envía solo monto, sin datos del cliente
-- PayPhone rechaza por falta de PhoneNumber/CountryCode
-- **Necesitas pedir teléfono del cliente**
+**✅ SOLUCIÓN IMPLEMENTADA:**
+- **Teléfono del COMERCIO** (0998842547) usado para todas las transacciones
+- Cliente **NO necesita** proporcionar su teléfono
+- PayPhone valida contra teléfono registrado del establecimiento
+- Flujo simplificado: **edad → cálculo → pago directo**
 
-**✅ SOLUCIÓN CORRECTA:**
-- Kiosko debe pedir: **edad + teléfono del cliente**
-- Enviar `phoneNumber` y `countryCode` del cliente
-- Para pruebas: teléfono debe estar registrado como "probador"
+**🔍 ¿Por qué funciona esto?**
+- PayPhone requiere `phoneNumber` + `countryCode` para validar transacción
+- En lugar de pedir teléfono del cliente, usamos teléfono del condominio
+- Cliente paga normalmente con tarjeta sin proporcionar datos personales
+- Comercio mantiene control administrativo con su propio teléfono
+
+**💡 VENTAJA de esta solución:**
+- ✅ Cliente no revela datos personales
+- ✅ Comercio mantiene control de validación
+- ✅ Funciona en sandbox (teléfono registrado como "probador")
+- ✅ Compatible con requerimientos de PayPhone
 
 #### 🔍 ¿Qué pide PayPhone exactamente?
 

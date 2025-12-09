@@ -123,7 +123,7 @@ app.post('/crear-pago', validarPago, async (req, res) => {
   console.log('========================');
 
   try {
-    // Construir payload para PayPhone - SOLO campos esenciales para pagos con tarjeta
+    // Construir payload para PayPhone - USANDO TELÉFONO DEL COMERCIO
     const payphonePayload = {
       amount: Math.round(parseFloat(amount) * 100),
       amountWithTax: 0,
@@ -135,17 +135,17 @@ app.post('/crear-pago', validarPago, async (req, res) => {
       clientTransactionId: "KIOSKO-" + Date.now(),
       storeId: 1711274975001,
       reference: `Pago kiosko - $${amount}`,
+      // USAR TELÉFONO DEL COMERCIO (no del cliente)
+      phoneNumber: "998842547", // Tu teléfono 0998842547 sin el 0 inicial
+      countryCode: "593",
       responseUrl: "https://tu-app.up.railway.app/confirmacion",
       cancelUrl: "https://tu-app.up.railway.app/cancelado"
     };
 
-    // Campos OPCIONALES - solo incluir si se proporcionan
+    // Campos OPCIONALES adicionales
     if (email) payphonePayload.email = email;
-    if (phone) payphonePayload.phoneNumber = phone;
+    if (phone) payphonePayload.customerPhone = phone; // Teléfono del cliente si se proporciona
     if (documentId) payphonePayload.documentId = documentId;
-
-    // CountryCode solo si hay teléfono
-    if (phone) payphonePayload.countryCode = "593";
 
     console.log('=== PAYLOAD ENVIADO A PAYPHONE ===');
     console.log(JSON.stringify(payphonePayload, null, 2));
