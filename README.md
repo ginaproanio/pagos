@@ -67,6 +67,7 @@ Reemplaza `tu-app` con el nombre de tu aplicación en Railway.
 
 ### Errores Comunes
 
+#### Errores del Sistema
 **Error: "Error al crear pago"**
 - **Causa**: Problema con la integración de PayPhone
 - **Solución**: Revisa la consola del navegador y los logs del servidor
@@ -82,6 +83,57 @@ Reemplaza `tu-app` con el nombre de tu aplicación en Railway.
 **Error: "Error interno: [mensaje]"**
 - **Causa**: Error en el código del servidor
 - **Solución**: Revisa logs del servidor y configuración
+
+#### Códigos de Error PayPhone
+
+**400 - Validaciones fallidas (errorCode: 800)**
+- **Sub-errores comunes**:
+  - `PhoneNumber`: "Número de teléfono inválido"
+  - `CountryCode`: "Campo obligatorio"
+  - `Amount`: "Monto inválido"
+  - `Currency`: "Moneda no soportada"
+  - `DocumentId`: "Documento de identidad inválido"
+- **Solución**: Verificar formato de datos enviados
+
+**404 - Número no registrado (errorCode: 120)**
+- **Mensaje**: "Lo sentimos, este número no está registrado en Payphone"
+- **Causa**: El teléfono usado no está registrado como probador en PayPhone
+- **Solución**: Agregar el número como probador en el panel de PayPhone o usar un número registrado
+- **Nota**: Este error es **NORMAL en desarrollo** cuando no has configurado probadores. Una vez que agregues números de teléfono como probadores en el panel de PayPhone, este error desaparecerá.
+
+**401 - No autorizado (errorCode: 100)**
+- **Causa**: Token inválido o expirado
+- **Solución**: Verificar `PAYPHONE_TOKEN` en variables de entorno
+
+**403 - Prohibido (errorCode: 110)**
+- **Causa**: Credenciales incorrectas o permisos insuficientes
+- **Solución**: Verificar `PAYPHONE_CLIENT_ID` y `PAYPHONE_SECRET`
+
+**429 - Demasiadas solicitudes (errorCode: 130)**
+- **Causa**: Límite de rate limiting excedido
+- **Solución**: Esperar y reducir frecuencia de solicitudes
+
+**500 - Error interno del servidor (errorCode: 200)**
+- **Causa**: Error en los servidores de PayPhone
+- **Solución**: Reintentar más tarde o contactar soporte de PayPhone
+
+**502/503/504 - Errores de gateway**
+- **Causa**: Problemas de infraestructura
+- **Solución**: Reintentar la solicitud
+
+#### Estados de Transacción (en URLs de respuesta)
+
+**Approved**
+- Pago exitoso procesado
+
+**Rejected**
+- Pago rechazado por el banco o procesador
+
+**Cancelled**
+- Usuario canceló el pago
+
+**Pending**
+- Pago en proceso de verificación
 
 ### Cómo Depurar
 
