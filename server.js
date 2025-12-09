@@ -3,6 +3,7 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const cors = require('cors');
+const fs = require('fs').promises;
 
 const app = express();
 app.use(cors());
@@ -63,25 +64,116 @@ app.post('/crear-pago', async (req, res) => {
     console.error('Status:', error.response?.status);
     console.error('Headers:', error.response?.headers);
 
+    // Sistema de documentación de errores PayPhone
+    const payphoneErrorCodes = {
+      // Errores de validación (400)
+      800: {
+        category: 'VALIDATION_ERROR',
+        description: 'Validaciones fallidas',
+        commonFields: ['PhoneNumber', 'CountryCode', 'Amount', 'Currency', 'DocumentId'],
+        solutions: ['Verificar formato de datos enviados', 'Revisar documentación de campos requeridos']
+      },
+      // Errores de autenticación (401/403)
+      100: {
+        category: 'AUTHENTICATION_ERROR',
+        description: 'No autorizado - Token inválido o expirado',
+        solutions: ['Verificar PAYPHONE_TOKEN en variables de entorno', 'Regenerar token si expiró']
+      },
+      110: {
+        category: 'AUTHENTICATION_ERROR',
+        description: 'Prohibido - Credenciales incorrectas o permisos insuficientes',
+        solutions: ['Verificar PAYPHONE_CLIENT_ID y PAYPHONE_SECRET', 'Revisar permisos en panel PayPhone']
+      },
+      // Errores de recursos no encontrados (404)
+      120: {
+        category: 'RESOURCE_NOT_FOUND',
+        description: 'Número no registrado en PayPhone',
+        solutions: ['Agregar el número como probador en panel PayPhone', 'Usar números registrados para pruebas']
+      },
+      // Errores de rate limiting (429)
+      130: {
+        category: 'RATE_LIMIT_ERROR',
+        description: 'Demasiadas solicitudes - Rate limiting excedido',
+        solutions: ['Esperar antes de reintentar', 'Reducir frecuencia de solicitudes', 'Implementar backoff exponencial']
+      },
+      // Errores del servidor (500)
+      200: {
+        category: 'SERVER_ERROR',
+        description: 'Error interno del servidor PayPhone',
+        solutions: ['Reintentar más tarde', 'Verificar estado de servicios PayPhone']
+      }
+    };
+
     let errorMessage = "Error al crear pago";
     let errorDetails = {};
+    let payphoneErrorInfo = null;
 
     if (error.response) {
       // El servidor respondió con un código de error
-      errorMessage = `Error del servidor PayPhone: ${error.response.status}`;
+      const status = error.response.status;
+      const errorData = error.response.data;
+
+      // Extraer información específica de PayPhone
+      const payphoneErrorCode = errorData?.errorCode;
+      if (payphoneErrorCode && payphoneErrorCodes[payphoneErrorCode]) {
+        payphoneErrorInfo = payphoneErrorCodes[payphoneErrorCode];
+        errorMessage = `Error PayPhone (${payphoneErrorCode}): ${payphoneErrorInfo.description}`;
+      } else {
+        errorMessage = `Error del servidor PayPhone: ${status}`;
+      }
+
       errorDetails = {
-        status: error.response.status,
+        status: status,
         statusText: error.response.statusText,
-        data: error.response.data
+        data: errorData,
+        payphoneErrorCode: payphoneErrorCode,
+        category: payphoneErrorInfo?.category || 'UNKNOWN_ERROR',
+        timestamp: new Date().toISOString()
       };
+
+      // Log detallado para documentación
+      console.error('=== ERROR PAYPHONE DOCUMENTADO ===');
+      console.error(`Timestamp: ${errorDetails.timestamp}`);
+      console.error(`Categoría: ${errorDetails.category}`);
+      console.error(`Status HTTP: ${status}`);
+      console.error(`Código PayPhone: ${payphoneErrorCode || 'N/A'}`);
+      console.error(`Mensaje: ${errorData?.message || 'Sin mensaje'}`);
+      if (payphoneErrorInfo) {
+        console.error(`Descripción: ${payphoneErrorInfo.description}`);
+        console.error(`Soluciones sugeridas: ${payphoneErrorInfo.solutions.join(', ')}`);
+      }
+      console.error('==================================');
+
     } else if (error.request) {
       // La petición fue hecha pero no hubo respuesta
       errorMessage = "No se pudo conectar con PayPhone";
-      errorDetails = { message: "Sin respuesta del servidor" };
+      errorDetails = {
+        message: "Sin respuesta del servidor",
+        category: 'NETWORK_ERROR',
+        timestamp: new Date().toISOString()
+      };
+      console.error('=== ERROR DE RED ===');
+      console.error(`Timestamp: ${errorDetails.timestamp}`);
+      console.error('Tipo: Sin respuesta del servidor PayPhone');
+      console.error('Posibles causas: Problemas de conectividad, firewall, DNS');
+      console.error('===================');
     } else {
       // Algo pasó al configurar la petición
       errorMessage = `Error interno: ${error.message}`;
-      errorDetails = { message: error.message };
+      errorDetails = {
+        message: error.message,
+        category: 'INTERNAL_ERROR',
+        timestamp: new Date().toISOString()
+      };
+      console.error('=== ERROR INTERNO ===');
+      console.error(`Timestamp: ${errorDetails.timestamp}`);
+      console.error(`Mensaje: ${error.message}`);
+      console.error('====================');
+    }
+
+    // Agregar soluciones si están disponibles
+    if (payphoneErrorInfo?.solutions) {
+      errorDetails.solutions = payphoneErrorInfo.solutions;
     }
 
     res.status(500).json({

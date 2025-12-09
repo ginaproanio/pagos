@@ -1,181 +1,2335 @@
-# Pagos - PayPhone Integration
+# Sistema de Pagos con PayPhone
 
-Este proyecto es una aplicación web para realizar pagos de prueba utilizando PayPhone.
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
 
-## Características
+## 🚀 Características
 
-- Interfaz simple para ingresar monto de pago
-- Integración con PayPhone para procesamiento de pagos
-- Páginas de confirmación y cancelación
-- Desplegado en Railway
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
 
-## Configuración
+## 📦 Instalación
 
-### Variables de Entorno
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
 
-Crea un archivo `.env` con las siguientes variables:
+### Instalación Local
 
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
 ```
-PORT=3000
-PAYPHONE_CLIENT_ID=wbMFPpdK8EuioYnLZcLvw
-PAYPHONE_SECRET=Dj0kiMVN3UGYvHIRhzNWyg
-PAYPHONE_ENCODE_PASS=1ec58fe5c20e46d6929d122d3874e745
-PAYPHONE_TOKEN=KwZnR4t6DGcgq_8XkME9dMVVtCIUnLOCFPLGLRHA1f_pPvXf8nhvxwtTceVyfK-sD95m6koyd1vvu-rYcDWmKqjAcE2zc2lt9LGqElXwuEmMlrIWEa64PELeQuL4D3t4Iwr2eRrbcqFuhga5n35Gijjuwex6qyoJM7o88emSEsBluZk33W437uUJhVjybA7gRVHsx0wWLdbs7QfVH6o2I0EWwnHVM3Crx7EZziB_g8ueHGi3vkElz52GyMuHCKhfyTa78oh_kvyti36GNm7wXm1H-gVBk7Wz6I4uctjPQywMAfe77eOxgidGVcRBQQljrOCGnA
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
 ```
 
-### Instalación Local (Opcional)
+## 🌐 Despliegue
 
-Si deseas probar localmente:
+### Railway (Recomendado)
 
-1. Instala las dependencias:
-   ```
-   npm install
-   ```
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
 
-2. Ejecuta el servidor:
-   ```
-   npm start
-   ```
+### Otros Servicios
 
-3. Abre http://localhost:3000 en tu navegador.
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
 
-### Despliegue en Railway
+## 💳 Uso
 
-Este proyecto está configurado para desplegarse automáticamente en Railway.
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
 
-1. Conecta tu repositorio de GitHub a Railway.
-2. Railway detectará el `package.json` y ejecutará `npm start`.
-3. Asegúrate de configurar las variables de entorno en Railway Dashboard.
+## 🔧 Desarrollo
 
-### URLs de Respuesta
+Para información técnica detallada, configuración avanzada y troubleshooting:
 
-Después del despliegue, actualiza las URLs en `server.js`:
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
 
-- `responseUrl`: `https://tu-app.up.railway.app/confirmacion`
-- `cancelUrl`: `https://tu-app.up.railway.app/cancelado`
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
 
-Reemplaza `tu-app` con el nombre de tu aplicación en Railway.
+## 🛡️ Seguridad
 
-## Uso
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
 
-1. Ingresa el monto a pagar.
-2. Haz clic en "PAGAR CON PAYPHONE".
-3. Serás redirigido a la pasarela de PayPhone.
-4. Después del pago, volverás a la página de confirmación.
+## 📚 Tecnologías
 
-## Debugging y Troubleshooting
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
 
-### Errores Comunes
+## 📄 Licencia
 
-#### Errores del Sistema
-**Error: "Error al crear pago"**
-- **Causa**: Problema con la integración de PayPhone
-- **Solución**: Revisa la consola del navegador y los logs del servidor
-- **Información detallada**: El sistema ahora muestra errores detallados incluyendo:
-  - Código de status HTTP
-  - Respuesta completa del servidor PayPhone
-  - Timestamp del error
+Este proyecto es privado y confidencial.
 
-**Error: "No se pudo conectar con PayPhone"**
-- **Causa**: Problemas de conectividad o servidor PayPhone caído
-- **Solución**: Verifica conexión a internet y estado de PayPhone
+## 🤝 Soporte
 
-**Error: "Error interno: [mensaje]"**
-- **Causa**: Error en el código del servidor
-- **Solución**: Revisa logs del servidor y configuración
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
 
-#### Códigos de Error PayPhone
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
 
-**400 - Validaciones fallidas (errorCode: 800)**
-- **Sub-errores comunes**:
-  - `PhoneNumber`: "Número de teléfono inválido"
-  - `CountryCode`: "Campo obligatorio"
-  - `Amount`: "Monto inválido"
-  - `Currency`: "Moneda no soportada"
-  - `DocumentId`: "Documento de identidad inválido"
-- **Solución**: Verificar formato de datos enviados
+## 🚀 Características
 
-**404 - Número no registrado (errorCode: 120)**
-- **Mensaje**: "Lo sentimos, este número no está registrado en Payphone"
-- **Causa**: El teléfono usado no está registrado como probador en PayPhone
-- **Solución**: Agregar el número como probador en el panel de PayPhone o usar un número registrado
-- **Nota**: Este error es **NORMAL en desarrollo** cuando no has configurado probadores. Una vez que agregues números de teléfono como probadores en el panel de PayPhone, este error desaparecerá.
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
 
-**401 - No autorizado (errorCode: 100)**
-- **Causa**: Token inválido o expirado
-- **Solución**: Verificar `PAYPHONE_TOKEN` en variables de entorno
+## 📦 Instalación
 
-**403 - Prohibido (errorCode: 110)**
-- **Causa**: Credenciales incorrectas o permisos insuficientes
-- **Solución**: Verificar `PAYPHONE_CLIENT_ID` y `PAYPHONE_SECRET`
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
 
-**429 - Demasiadas solicitudes (errorCode: 130)**
-- **Causa**: Límite de rate limiting excedido
-- **Solución**: Esperar y reducir frecuencia de solicitudes
+### Instalación Local
 
-**500 - Error interno del servidor (errorCode: 200)**
-- **Causa**: Error en los servidores de PayPhone
-- **Solución**: Reintentar más tarde o contactar soporte de PayPhone
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
 
-**502/503/504 - Errores de gateway**
-- **Causa**: Problemas de infraestructura
-- **Solución**: Reintentar la solicitud
+# Instala dependencias
+npm install
 
-#### Estados de Transacción (en URLs de respuesta)
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
 
-**Approved**
-- Pago exitoso procesado
+# Ejecuta el servidor
+npm start
+```
 
-**Rejected**
-- Pago rechazado por el banco o procesador
+## 🌐 Despliegue
 
-**Cancelled**
-- Usuario canceló el pago
+### Railway (Recomendado)
 
-**Pending**
-- Pago en proceso de verificación
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
 
-### Cómo Depurar
+### Otros Servicios
 
-1. **Frontend**:
-   - Los errores ahora se muestran en la página web en un contenedor rojo copiable
-   - Usa el botón "Copiar Error" para copiar toda la información técnica
-   - Abre la consola del navegador (F12) para ver logs adicionales de JavaScript
-2. **Backend**: Los logs del servidor se muestran en la terminal donde corre la aplicación
-3. **PayPhone**: Verifica en el panel de desarrolladores que las credenciales sean correctas
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
 
-### Logs Importantes
+## 💳 Uso
 
-El servidor registra información detallada de errores:
-- Error completo del objeto
-- Respuesta del servidor PayPhone
-- Status HTTP
-- Headers de respuesta
-- Timestamp
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
 
-### Variables de Entorno
+## 🔧 Desarrollo
 
-Asegúrate de que estas variables estén correctamente configuradas:
-- `PAYPHONE_CLIENT_ID`: ID del cliente de PayPhone
-- `PAYPHONE_SECRET`: Clave secreta
-- `PAYPHONE_ENCODE_PASS`: Contraseña de codificación
-- `PAYPHONE_TOKEN`: Token de autenticación
+Para información técnica detallada, configuración avanzada y troubleshooting:
 
-### Formato de Datos PayPhone
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
 
-**Teléfono**: Sin el código de país, sin el 0 inicial (ej: 999999999)
-**CountryCode**: Siempre "593" para Ecuador
-**Monto**: Se convierte automáticamente a centavos
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
 
-### URLs de Respuesta
+## 🛡️ Seguridad
 
-Después del despliegue en Railway, actualiza estas URLs en `server.js`:
-- `responseUrl`: URL de confirmación
-- `cancelUrl`: URL de cancelación
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
 
-## Tecnologías
+## 📚 Tecnologías
 
-- Node.js
-- Express
-- Axios
-- PayPhone API
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
+3. **Serás redirigido** a la pasarela segura de PayPhone
+4. **Completa el pago** con tu método preferido
+5. **Recibirás confirmación** del resultado
+
+## 🔧 Desarrollo
+
+Para información técnica detallada, configuración avanzada y troubleshooting:
+
+📖 **[Ver documentación completa en DEVELOPMENT.md](DEVELOPMENT.md)**
+
+Incluye:
+- Configuración de variables de entorno
+- Documentación de errores PayPhone
+- Guías de debugging
+- Formatos de datos requeridos
+
+## 🛡️ Seguridad
+
+- ✅ Credenciales PayPhone protegidas
+- ✅ Validación de datos de entrada
+- ✅ Conexión HTTPS obligatoria
+- ✅ Rate limiting implementado
+
+## 📚 Tecnologías
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5 + JavaScript Vanilla
+- **API**: PayPhone Payment Gateway
+- **Despliegue**: Railway
+
+## 📄 Licencia
+
+Este proyecto es privado y confidencial.
+
+## 🤝 Soporte
+
+Para soporte técnico contactar al equipo de desarrollo.
+<replace_in_file>
+<path>README.md</path>
+<diff>------- SEARCH
+# Sistema de Pagos con PayPhone
+
+Una aplicación web simple para procesar pagos utilizando la API de PayPhone.
+
+## 🚀 Características
+
+- Interfaz web intuitiva para pagos
+- Integración completa con PayPhone
+- Sistema de confirmación y cancelación
+- Desplegado automáticamente en Railway
+
+## 📦 Instalación
+
+### Requisitos
+- Node.js v16 o superior
+- Cuenta PayPhone (para obtener credenciales)
+
+### Instalación Local
+
+```bash
+# Clona el repositorio
+git clone https://github.com/tu-usuario/pagos.git
+cd pagos
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno (ver DEVELOPMENT.md)
+cp .env.example .env
+
+# Ejecuta el servidor
+npm start
+```
+
+## 🌐 Despliegue
+
+### Railway (Recomendado)
+
+1. Conecta tu repositorio GitHub a Railway
+2. Railway detectará automáticamente el `package.json`
+3. Configura las variables de entorno en el dashboard de Railway
+4. ¡Listo! La aplicación estará disponible automáticamente
+
+### Otros Servicios
+
+Compatible con cualquier servicio de hosting que soporte Node.js:
+- Heroku
+- Vercel
+- DigitalOcean App Platform
+- AWS, GCP, Azure
+
+## 💳 Uso
+
+1. **Ingresa el monto** a pagar
+2. **Haz clic en "PAGAR CON PAYPHONE"**
