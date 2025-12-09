@@ -61,26 +61,37 @@ app.post('/crear-pago', async (req, res) => {
   console.log('========================');
 
   try {
+    // Construir payload para PayPhone - SOLO campos esenciales para pagos con tarjeta
+    const payphonePayload = {
+      amount: Math.round(parseFloat(amount) * 100),
+      amountWithTax: 0,
+      amountWithoutTax: Math.round(parseFloat(amount) * 100),
+      tax: 0,
+      service: 0,
+      tip: 0,
+      currency: "USD",
+      clientTransactionId: "KIOSKO-" + Date.now(),
+      storeId: 1711274975001,
+      reference: `Pago kiosko - $${amount}`,
+      responseUrl: "https://tu-app.up.railway.app/confirmacion",
+      cancelUrl: "https://tu-app.up.railway.app/cancelado"
+    };
+
+    // Campos OPCIONALES - solo incluir si se proporcionan
+    if (email) payphonePayload.email = email;
+    if (phone) payphonePayload.phoneNumber = phone;
+    if (documentId) payphonePayload.documentId = documentId;
+
+    // CountryCode solo si hay teléfono
+    if (phone) payphonePayload.countryCode = "593";
+
+    console.log('=== PAYLOAD ENVIADO A PAYPHONE ===');
+    console.log(JSON.stringify(payphonePayload, null, 2));
+    console.log('===================================');
+
     const response = await axios.post(
       'https://pay.payphonetodoesposible.com/api/Sale',
-      {
-        amount: amountInCents,
-        amountWithTax: 0,
-        amountWithoutTax: amountInCents,
-        tax: 0,
-        service: 0,
-        tip: 0,
-        currency: "USD",
-        clientTransactionId: "COND-" + Date.now(),
-        storeId: 1711274975001, // este número está en tu token
-        reference: "Pago de prueba condominio",
-        email: email || "tester@condo.com",
-        phoneNumber: phone || "999999999",
-        countryCode: "593", // Código de Ecuador para PayPhone
-        documentId: documentId || "9999999999",
-        responseUrl: "https://tu-app.up.railway.app/confirmacion", // lo cambias después del deploy
-        cancelUrl: "https://tu-app.up.railway.app/cancelado"
-      },
+      payphonePayload,
       {
         headers: {
           'Authorization': `Bearer ${process.env.PAYPHONE_TOKEN}`,

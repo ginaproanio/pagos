@@ -24,48 +24,46 @@ PAYPHONE_TOKEN=KwZnR4t6DGcgq_8XkME9dMVVtCIUnLOCFPLGLRHA1f_pPvXf8nhvxwtTceVyfK-sD
 
 ### ⚠️ REQUISITOS PARA ENTORNO DE PRUEBAS
 
-**IMPORTANTE**: En el entorno sandbox de PayPhone, es **OBLIGATORIO** registrar números de teléfono como "probadores" antes de poder procesar transacciones.
+**IMPORTANTE**: Dependiendo del tipo de pago, los requisitos varían.
 
-#### 🤔 ¿Por qué PayPhone requiere probadores?
+#### 🎯 Para PAGOS CON TARJETA (como tu kiosko):
 
-**Distinción clave:**
-- **COMERCIO** (tú): Configuras cuenta con credenciales para RECIBIR pagos ✅
-- **CLIENTE** (quien paga): En sandbox, debe estar registrado como "probador" para PODER PAGAR
+**Teléfono y email son OPCIONALES** ✅
+- Solo necesitas enviar el **monto** y **URLs de respuesta**
+- PayPhone genera la pasarela para que el cliente ingrese datos de tarjeta
+- No hay validación de "probadores" para pagos con tarjeta
 
-#### ¿Qué significa ser "probador" en PayPhone?
-- Los números de teléfono registrados pueden ACTUAR como clientes que pagan
-- Solo números registrados pueden SIMULAR pagos en entorno de prueba
-- Si no están registrados → Error 404/120 automáticamente
-- En producción, cualquier número válido puede pagar sin registro previo
-
-#### 📱 Analogía:
-```
-Producción: Cualquier persona con tarjeta puede comprar en tu tienda
-Sandbox:   Solo "clientes autorizados" pueden "comprar" para pruebas
-```
-
-#### ¿Qué pasa si no hay probadores registrados?
-```
-Error: Error PayPhone (120): Número no registrado en Payphone
-Status: 404
-Comportamiento: ❌ NO se genera URL de pasarela
-Causa: El "cliente" (número de teléfono) no está autorizado para pruebas
+**Campos mínimos requeridos:**
+```json
+{
+  "amount": 5000,           // Monto en centavos
+  "currency": "USD",        // Moneda
+  "responseUrl": "...",     // URL de éxito
+  "cancelUrl": "..."        // URL de cancelación
+}
 ```
 
-#### 🔍 ¿Puedes cobrar SIN tener números registrados?
+#### 📞 Para PAGOS CON TELÉFONO (si aplicara):
 
-**Respuesta corta**: ❌ NO en sandbox, pero ✅ SÍ en producción
+**Teléfono OBLIGATORIO como "probador"** ❌
+- Si envías `phoneNumber`, debe estar registrado en PayPhone
+- Error 404/120 si el teléfono no es probador
+- Solo para pruebas con métodos de pago por teléfono
 
-**Explicación**:
-- En **sandbox**: PayPhone quiere controlar quién puede "pagar" para evitar uso indebido
-- En **producción**: Cualquier cliente con número válido puede pagar sin registro previo
-- El comercio (tú) siempre puede recibir pagos, pero en pruebas necesitas "clientes autorizados"
+#### 📱 Tu caso de uso (KIOSKO):
 
-#### Solución para desarrollo:
-1. **Acceder al panel de PayPhone**
-2. **Ir a sección "Probadores"**
-3. **Registrar números de teléfono que actuarán como "clientes de prueba"**
-4. **Usar esos números en las transacciones de prueba**
+**✅ SOLUCIÓN IMPLEMENTADA:**
+- Código actualizado para **NO enviar teléfono por defecto**
+- Solo envía teléfono si el frontend lo proporciona
+- Para kiosko con tarjeta: **no necesitas teléfono registrado**
+- PayPhone aceptará la transacción sin validación de probadores
+
+#### 🔍 ¿Por qué funcionará ahora?
+
+1. **Sin teléfono enviado**: PayPhone no valida probadores
+2. **Pago con tarjeta**: Cliente ingresa datos en pasarela segura
+3. **Validación automática**: PayPhone procesa con banco
+4. **Confirmación**: Kiosko recibe resultado vía webhook/callback
 
 ### URLs de Respuesta
 
