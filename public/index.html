@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago Prueba Condominio - PayPhone</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 80px; }
+    input, button { padding: 12px; margin: 10px; font-size: 18px; }
+    #loading { display: none; color: blue; }
+  </style>
+</head>
+<body>
+  <h1>Pago de cuotas - Prueba</h1>
+  <p>Ingresa el valor que deseas pagar (ej. 50.00)</p>
+
+  <input type="number" step="0.01" id="monto" placeholder="50.00" required>
+  <br>
+  <button onclick="iniciarPago()">PAGAR CON PAYPHONE</button>
+  <p id="loading">Redirigiendo a PayPhone, espera por favor...</p>
+
+  <script>
+    async function iniciarPago() {
+      const monto = document.getElementById("monto").value;
+      if (!monto || monto <= 0) return alert("Ingresa un monto válido");
+
+      document.getElementById("loading").style.display = "block";
+
+      const response = await fetch('/crear-pago', {
+        method: 'POST',
+        headers: true,
+        body: JSON.stringify({ amount: monto })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Redirige a la pasarela de PayPhone
+        window.location.href = data.paymentUrl;
+      } else {
+        alert("Error: " + data.message);
+        document.getElementById("loading").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
