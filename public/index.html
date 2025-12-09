@@ -28,7 +28,7 @@
 
       const response = await fetch('/crear-pago', {
         method: 'POST',
-        headers: true,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: monto })
       });
 
