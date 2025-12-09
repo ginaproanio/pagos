@@ -33,52 +33,54 @@ Este documento contiene toda la información técnica, errores, debugging y conf
 
 ---
 
-## 🚨 **¡CONFIRMADO! - DIFERENCIA API vs WEB**
+## 🚨 **¡PROBLEMA PERSISTENTE! - Aplicación NO AUTORIZADA**
 
-### **En la interfaz web de PayPhone al crear tokens:**
+### **¿Qué ocurre?**
 
-#### **🔑 Token API** (Tu sistema actual funciona)
-- ✅ **NO especificas dominio** al crear el token
-- ✅ **Sin restricciones CORS**
-- ✅ **Funciona desde cualquier servidor** (hostinguer, Railway, etc.)
-- ✅ **Tu aplicación actual** está configurada como API
-- ✅ **Por eso funciona** `puntablancaecuador.com/finalizar-compra/`
-- ✅ **Nunca pediste autorización** porque no la necesita
+**AUNQUE creaste la aplicación "Condomanager", PayPhone AÚN NO LA HA AUTORIZADO COMPLETAMENTE.**
 
-#### **🌐 Token WEB** (Nuestro kiosko falla)
-- ❌ **SÍ especificas dominio** al crear el token
-- ❌ **Restricciones CORS estrictas**
-- ❌ **Requiere registro de dominios autorizados**
-- ❌ **Nuestra aplicación** está configurada como Web
-- ❌ **Por eso falla** en Railway (dominio no autorizado)
+### **Evidencia:**
+- ✅ **Aplicación creada**: Condomanager existe
+- ✅ **Token generado**: Credenciales válidas
+- ✅ **Dominio configurado**: `pagos-production-03d8.up.railway.app`
+- ❌ **ERROR IGUAL**: "Su aplicación no esta autorizada..."
 
-### **¿Cuál estamos usando?**
+### **¿Por qué?**
 
-**Estamos usando TOKEN WEB** que requiere especificar dominio autorizado.
+#### **Posibles razones:**
+1. **⏳ Espera aprobación**: PayPhone revisa aplicaciones nuevas
+2. **👥 Faltan probadores**: Aplicaciones Web requieren probadores
+3. **⚙️ Configuración incompleta**: Faltan pasos de activación
+4. **🔒 Revisión pendiente**: PayPhone debe aprobar manualmente
 
-**Tu sistema actual usa TOKEN API** que NO requiere especificar dominio.
+## 🛠️ **¿Qué hacer ahora?**
 
-## 🎯 **SOLUCIÓN DEFINITIVA:**
+### **Paso 1: Agregar Probadores**
+En PayPhone → Condomanager → **"Probadores"**:
+- Agrega números de teléfono registrados
+- Para pruebas: usa tu teléfono `0998842547`
 
-### **Cambiar Token Web → Token API en PayPhone**
+### **Paso 2: Verificar Estado**
+- Revisa si la aplicación está en "Producción" o "Prueba"
+- Confirma que el dominio esté guardado
 
-1. **Ve a PayPhone** → Panel → **PUNTA BLANCA**
-2. **Selecciona "API"** en lugar de "Web" al crear el token
-3. **Genera nuevo token** tipo API (sin especificar dominio)
-4. **Actualiza el .env** con el nuevo token API
-5. **Deploy a Railway** → **Funcionará inmediatamente**
+### **Paso 3: Contactar PayPhone**
+Si persiste, contacta soporte de PayPhone explicando:
+```
+"Tengo aplicación Web 'Condomanager' configurada para dominio Railway,
+pero recibo error 401 de 'aplicación no autorizada'."
+```
 
-### **¿Por qué funcionará?**
+### **Paso 4: Alternativa - Usar Token API**
+Como último recurso, cambia a **token API** (sin dominio):
+1. Crea nueva aplicación tipo **"API"**
+2. Genera token API
+3. Actualiza código con token API
+4. Funcionará sin restricciones de dominio
 
-- ✅ **Tokens API** = Sin especificar dominios
-- ✅ **Como tu sistema actual** que funciona sin pedir nada
-- ✅ **Funcionará en Railway** igual que en hostinguer
-- ✅ **NO necesitarás** pedir autorización a PayPhone
-- ✅ **Cambias el tipo** en la interfaz de PayPhone
+## ⚠️ **Estado actual:**
 
-## 💡 **Resultado:**
-
-Una vez cambies a **token API** (sin especificar dominio), el kiosko funcionará perfectamente en Railway **igual que tu sistema actual**.
+**La aplicación existe pero PayPhone aún no la autorizó para transacciones.** Necesitas completar la configuración o esperar aprobación.
 
 ### 📞 Número de Teléfono del Establecimiento
 
