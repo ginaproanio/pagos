@@ -10,11 +10,13 @@ Este documento registra todos los errores encontrados durante las pruebas y desa
 **Mensaje**: "Lo sentimos, este número no está registrado en Payphone"
 **Descripción técnica**: PayPhone valida el número de teléfono ANTES de generar URL de pasarela
 **Comportamiento observado**: ❌ No aparece pasarela de pago - Error ocurre en fase de creación de transacción
-**Contexto**: Intento de pago en entorno de desarrollo sin números de prueba configurados
-**Explicación**: PayPhone rechaza la transacción en `/api/Sale` antes de crear la URL `payWithCard`
-**Solución implementada**: Agregar el número como probador en panel PayPhone
-**Estado**: DOCUMENTADO - Error esperado en desarrollo
-**Frecuencia**: Alta (cada pago sin números registrados)
+**Contexto**: Intento de pago en entorno de desarrollo sin números de teléfono registrados como "probadores"
+**Explicación**: PayPhone requiere que los números estén registrados como probadores en el panel antes de permitir transacciones
+**Causa raíz**: Sistema envía teléfono por defecto "999999999" que no está registrado en PayPhone
+**Solución requerida**: Registrar números de teléfono como probadores en panel de PayPhone
+**Estado**: DOCUMENTADO - Comportamiento esperado de PayPhone sandbox
+**Frecuencia**: Alta (siempre que no haya probadores configurados)
+**Impacto**: Bloquea completamente la creación de transacciones de prueba
 
 ---
 

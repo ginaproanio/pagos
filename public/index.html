@@ -46,7 +46,14 @@
   <p>Ingresa el valor que deseas pagar (ej. 50.00)</p>
 
   <input type="number" step="0.01" id="monto" placeholder="50.00" required>
-  <br>
+  <br><br>
+
+  <div style="margin: 20px auto; max-width: 300px; text-align: left; font-size: 14px; color: #666;">
+    <p><strong>Nota importante:</strong></p>
+    <p>Para pruebas en PayPhone, el teléfono debe estar registrado como "probador" en el panel de PayPhone.</p>
+    <p>Si no tienes números registrados, contacta al administrador para configurar probadores.</p>
+  </div>
+
   <button onclick="iniciarPago()">PAGAR CON PAYPHONE</button>
   <p id="loading">Redirigiendo a PayPhone, espera por favor...</p>
 

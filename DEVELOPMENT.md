@@ -22,6 +22,29 @@ PAYPHONE_TOKEN=KwZnR4t6DGcgq_8XkME9dMVVtCIUnLOCFPLGLRHA1f_pPvXf8nhvxwtTceVyfK-sD
 **CountryCode**: Siempre "593" para Ecuador
 **Monto**: Se convierte automáticamente a centavos
 
+### ⚠️ REQUISITOS PARA ENTORNO DE PRUEBAS
+
+**IMPORTANTE**: En el entorno sandbox de PayPhone, es **OBLIGATORIO** registrar números de teléfono como "probadores" antes de poder procesar transacciones.
+
+#### ¿Qué significa ser "probador" en PayPhone?
+- Los números de teléfono deben estar registrados en el panel de PayPhone
+- Solo números registrados pueden iniciar transacciones de prueba
+- Si no están registrados → Error 404/120 automáticamente
+- En producción, cualquier número válido funciona
+
+#### ¿Qué pasa si no hay probadores registrados?
+```
+Error: Error PayPhone (120): Número no registrado en Payphone
+Status: 404
+Comportamiento: ❌ NO se genera URL de pasarela
+```
+
+#### Solución para desarrollo:
+1. **Acceder al panel de PayPhone**
+2. **Ir a sección "Probadores"**
+3. **Registrar números de teléfono autorizados**
+4. **Usar esos números en las pruebas**
+
 ### URLs de Respuesta
 
 Después del despliegue, actualiza estas URLs en `server.js`:
