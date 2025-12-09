@@ -53,34 +53,47 @@ Este documento contiene toda la información técnica, errores, debugging y conf
 3. **⚙️ Configuración incompleta**: Faltan pasos de activación
 4. **🔒 Revisión pendiente**: PayPhone debe aprobar manualmente
 
-## 🛠️ **¿Qué hacer ahora?**
+## 🛠️ **¿Qué hacer ahora? - CAMBIAR PLATAFORMA A JAVA**
 
-### **Paso 1: Agregar Probadores**
-En PayPhone → Condomanager → **"Probadores"**:
-- Agrega números de teléfono registrados
-- Para pruebas: usa tu teléfono `0998842547`
+### **🚨 POSIBLE SOLUCIÓN: Cambiar Plataforma a Java**
 
-### **Paso 2: Verificar Estado**
-- Revisa si la aplicación está en "Producción" o "Prueba"
-- Confirma que el dominio esté guardado
+**El error 401 podría ser porque la plataforma configurada no coincide con nuestro stack Node.js.**
 
-### **Paso 3: Contactar PayPhone**
-Si persiste, contacta soporte de PayPhone explicando:
-```
-"Tengo aplicación Web 'Condomanager' configurada para dominio Railway,
-pero recibo error 401 de 'aplicación no autorizada'."
-```
+### **Paso 1: Cambiar Plataforma en PayPhone**
+1. Ve a **PayPhone** → **Panel** → **Condomanager**
+2. **Edita la aplicación**
+3. **Cambia "Plataforma"** de lo que tengas actualmente → **"Java"**
+4. **Guarda cambios**
+5. **Regenera el token** si PayPhone lo solicita
 
-### **Paso 4: Alternativa - Usar Token API**
-Como último recurso, cambia a **token API** (sin dominio):
-1. Crea nueva aplicación tipo **"API"**
+### **¿Por qué Java?**
+- ✅ **Node.js ejecuta JavaScript**
+- ✅ **Java y JavaScript** son lenguajes similares (familia C)
+- ✅ **Node.js corre en motor V8** (como Chrome)
+- ✅ **PayPhone no tiene opción Node.js**, Java es la más cercana
+
+### **Paso 2: Probar Nuevamente**
+Después de cambiar a Java:
+1. **Espera 5-10 minutos** (que PayPhone actualice)
+2. **Haz una prueba** en Railway
+3. **Revisa si el error 401 persiste**
+
+### **Paso 3: Si aún falla - Agregar Probadores**
+Si el cambio de plataforma no resuelve:
+1. En PayPhone → Condomanager → **"Probadores"**
+2. Agrega números de teléfono registrados
+3. Usa `0998842547` como probador
+
+### **Paso 4: Última Alternativa - Token API**
+Si nada funciona:
+1. Crea **nueva aplicación** tipo **"API"** (sin dominio)
 2. Genera token API
-3. Actualiza código con token API
-4. Funcionará sin restricciones de dominio
+3. Actualiza `.env` con nuevo token
+4. Funcionará sin restricciones
 
 ## ⚠️ **Estado actual:**
 
-**La aplicación existe pero PayPhone aún no la autorizó para transacciones.** Necesitas completar la configuración o esperar aprobación.
+**Cambia la plataforma a JAVA en PayPhone.** Esto podría resolver el error 401 si es un problema de configuración de plataforma.
 
 ### 📞 Número de Teléfono del Establecimiento
 
