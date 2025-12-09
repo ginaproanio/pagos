@@ -4,11 +4,33 @@ const axios = require('axios');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs').promises;
+const rateLimit = require('express-rate-limit');
+const { body, validationResult } = require('express-validator');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+
+// Rate limiting para prevenir abuso
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 10, // máximo 10 solicitudes por ventana
+  message: {
+    success: false,
+    message: 'Demasiadas solicitudes desde esta IP. Intente más tarde.',
+    details: {
+      category: 'RATE_LIMIT_ERROR',
+      retryAfter: '15 minutos'
+    },
+    timestamp: new Date().toISOString()
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Aplicar rate limiting solo al endpoint de pagos
+app.use('/crear-pago', limiter);
 
 const PORT = process.env.PORT || 3000;
 
@@ -18,7 +40,47 @@ app.get('/', (req, res) => {
 });
 
 // 1. Crear la transacción (se llama desde el botón "Pagar")
-app.post('/crear-pago', async (req, res) => {
+// Validación de entrada con express-validator
+const validarPago = [
+  body('amount')
+    .isFloat({ min: 0.01, max: 10000 })
+    .withMessage('Monto debe ser un número positivo entre 0.01 y 10000')
+    .toFloat(),
+  body('email')
+    .optional()
+    .isEmail()
+    .normalizeEmail()
+    .withMessage('Email debe tener formato válido'),
+  body('phone')
+    .optional()
+    .isMobilePhone('es-EC')
+    .withMessage('Teléfono debe tener formato ecuatoriano válido'),
+  body('documentId')
+    .optional()
+    .isLength({ min: 10, max: 13 })
+    .isAlphanumeric()
+    .withMessage('Documento debe tener 10-13 caracteres alfanuméricos')
+];
+
+app.post('/crear-pago', validarPago, async (req, res) => {
+  // Verificar errores de validación
+  const erroresValidacion = validationResult(req);
+  if (!erroresValidacion.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      message: 'Datos de entrada inválidos',
+      timestamp: new Date().toISOString(),
+      details: {
+        category: 'VALIDATION_ERROR',
+        errors: erroresValidacion.array().map(err => ({
+          field: err.path,
+          message: err.msg,
+          value: err.value
+        }))
+      }
+    });
+  }
+
   const requestStartTime = Date.now();
   const { amount, email, phone, documentId } = req.body;
 
