@@ -37,7 +37,8 @@ app.post('/crear-pago', async (req, res) => {
         storeId: 1711274975001, // este número está en tu token
         reference: "Pago de prueba condominio",
         email: email || "tester@condo.com",
-        phoneNumber: phone || "0999999999",
+        phoneNumber: phone || "999999999",
+        countryCode: "593", // Código de Ecuador para PayPhone
         documentId: documentId || "9999999999",
         responseUrl: "https://tu-app.up.railway.app/confirmacion", // lo cambias después del deploy
         cancelUrl: "https://tu-app.up.railway.app/cancelado"

@@ -109,6 +109,12 @@ Asegúrate de que estas variables estén correctamente configuradas:
 - `PAYPHONE_ENCODE_PASS`: Contraseña de codificación
 - `PAYPHONE_TOKEN`: Token de autenticación
 
+### Formato de Datos PayPhone
+
+**Teléfono**: Sin el código de país, sin el 0 inicial (ej: 999999999)
+**CountryCode**: Siempre "593" para Ecuador
+**Monto**: Se convierte automáticamente a centavos
+
 ### URLs de Respuesta
 
 Después del despliegue en Railway, actualiza estas URLs en `server.js`:
