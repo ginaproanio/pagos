@@ -33,52 +33,55 @@ Este documento contiene toda la información técnica, errores, debugging y conf
 
 ---
 
-## 🚨 **PROBLEMA ACTUAL: PERMISOS DE APLICACIÓN**
+## 🚨 **INVESTIGACIÓN: REQUERIMIENTOS PARA APLICACIONES WEB**
 
-### **Nuevo Error:**
-```
-"Su aplicación no esta autorizada para acceder a este recurso.
-Verifique que el token este bien copiado o a que recursos puede acceder su tipo de aplicación."
-```
+### **Tu Token es REAL** ✅
+- Es de **PUNTA BLANCA** (condominio real)
+- **Ya cobra** de forma real
+- Store ID válido: `1793214995001`
 
-### **¿Qué significa esto?**
+### **¿Por qué falla en Railway?**
 
-**El Store ID es válido** ✅ (ya no dice "tienda no existe")
-**El token funciona** ✅ (autenticación exitosa)
-**Pero faltan PERMISOS** ❌ (no puede crear transacciones)
+#### **Posibles Causas para Aplicaciones Web:**
 
-### **Análisis del problema:**
+1. **🌐 Dominios Autorizados**
+   - PayPhone puede requerir que el dominio esté autorizado
+   - `pagos-production-03d8.up.railway.app` puede no estar registrado
+   - URLs de respuesta deben estar en lista blanca
 
-#### **Tipo de Aplicación: "Web"**
-- ✅ Puede autenticarse
-- ❌ **NO tiene permisos** para crear ventas (`/api/Sale`)
+2. **🔒 Restricciones de Aplicación Web**
+   - Aplicaciones Web pueden tener restricciones de CORS
+   - Pueden requerir configuración especial para dominios externos
+   - Railway puede estar bloqueado por PayPhone
 
-#### **Probadores: 0**
-- ❌ **Sin probadores configurados**
-- ❌ Aplicación Web en "modo prueba" pero sin usuarios autorizados
+3. **📡 Headers y Origen**
+   - PayPhone valida el `Origin` header
+   - Railway puede enviar headers diferentes
+   - Posible bloqueo por política de CORS
 
-### **¿Por qué ocurre?**
+4. **⚙️ Configuración de Aplicación**
+   - La aplicación Web puede necesitar configuración adicional
+   - URLs de callback deben estar registradas
+   - Posible verificación de dominio requerida
 
-1. **Aplicación Web** necesita probadores para funcionar
-2. **Sin probadores** = aplicación sin permisos de producción
-3. **Token válido** pero restringido por configuración
+### **¿Cómo Solucionar?**
 
-### **Soluciones posibles:**
+#### **Opción 1: Registrar Dominio en PayPhone**
+1. Ir a panel PayPhone → Configuración de aplicación
+2. Agregar `pagos-production-03d8.up.railway.app` a dominios autorizados
+3. Registrar URLs de callback
 
-#### **Opción 1: Configurar Probadores (Recomendado)**
-1. Ir a panel PayPhone → "Probadores"
-2. Agregar números de teléfono autorizados
-3. Usar esos números para pruebas
+#### **Opción 2: Configurar CORS en PayPhone**
+- Solicitar que habiliten Railway como origen permitido
+- Proporcionar URL específica del proyecto
 
-#### **Opción 2: Cambiar Tipo de Aplicación**
-- Cambiar de "Web" a "Producción"
-- Activar permisos completos
-- Requiere verificación PayPhone
+#### **Opción 3: Usar Dominio Personal**
+- Configurar un dominio personalizado en Railway
+- Registrar ese dominio en PayPhone
 
-#### **Opción 3: Contactar PayPhone**
-- Solicitar activación de permisos
-- Explicar caso de uso (kiosko condominio)
-- Pedir configuración especial
+#### **Opción 4: Contactar PayPhone**
+- Explicar: "Aplicación Web en Railway con token real que funciona en otro lugar"
+- Pedir configuración específica para Railway
 
 ### 📞 Número de Teléfono del Establecimiento
 

@@ -138,8 +138,8 @@ app.post('/crear-pago', validarPago, async (req, res) => {
       // USAR TELÉFONO DEL COMERCIO (no del cliente)
       phoneNumber: "998842547", // Tu teléfono 0998842547 sin el 0 inicial
       countryCode: "593",
-      responseUrl: "https://tu-app.up.railway.app/confirmacion",
-      cancelUrl: "https://tu-app.up.railway.app/cancelado"
+      responseUrl: "https://pagos-production-03d8.up.railway.app/confirmacion",
+      cancelUrl: "https://pagos-production-03d8.up.railway.app/cancelado"
     };
 
     // Campos OPCIONALES adicionales
