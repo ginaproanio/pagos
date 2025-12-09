@@ -8,6 +8,37 @@
     body { font-family: Arial; text-align: center; margin-top: 80px; }
     input, button { padding: 12px; margin: 10px; font-size: 18px; }
     #loading { display: none; color: blue; }
+    #error-container {
+      display: none;
+      background-color: #ffebee;
+      border: 1px solid #f44336;
+      border-radius: 4px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: left;
+      font-family: monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    #error-container h3 {
+      color: #d32f2f;
+      margin-top: 0;
+      text-align: center;
+    }
+    #copy-error {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #copy-error:hover {
+      background-color: #d32f2f;
+    }
   </style>
 </head>
 <body>
@@ -18,6 +49,13 @@
   <br>
   <button onclick="iniciarPago()">PAGAR CON PAYPHONE</button>
   <p id="loading">Redirigiendo a PayPhone, espera por favor...</p>
+
+  <div id="error-container">
+    <h3>Error en el procesamiento del pago</h3>
+    <pre id="error-content"></pre>
+    <button id="copy-error" onclick="copyError()">Copiar Error</button>
+    <button onclick="hideError()">Cerrar</button>
+  </div>
 
   <script>
     async function iniciarPago() {
@@ -38,7 +76,7 @@
         // Redirige a la pasarela de PayPhone
         window.location.href = data.paymentUrl;
       } else {
-        // Mostrar error detallado
+        // Mostrar error detallado en la página
         let errorMsg = "Error: " + data.message;
         if (data.details) {
           errorMsg += "\n\nDetalles técnicos:\n";
@@ -54,10 +92,52 @@
           errorMsg += `\nTimestamp: ${data.timestamp}`;
         }
 
-        alert(errorMsg);
+        showError(errorMsg);
         console.error("Error completo:", data);
         document.getElementById("loading").style.display = "none";
       }
+    function showError(errorMessage) {
+      document.getElementById("error-content").textContent = errorMessage;
+      document.getElementById("error-container").style.display = "block";
+      // Scroll to error
+      document.getElementById("error-container").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function hideError() {
+      document.getElementById("error-container").style.display = "none";
+    }
+
+    async function copyError() {
+      const errorText = document.getElementById("error-content").textContent;
+      try {
+        await navigator.clipboard.writeText(errorText);
+        const button = document.getElementById("copy-error");
+        const originalText = button.textContent;
+        button.textContent = "¡Copiado!";
+        button.style.backgroundColor = "#4caf50";
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.backgroundColor = "#f44336";
+        }, 2000);
+      } catch (err) {
+        // Fallback para navegadores antiguos
+        const textArea = document.createElement("textarea");
+        textArea.value = errorText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+
+        const button = document.getElementById("copy-error");
+        const originalText = button.textContent;
+        button.textContent = "¡Copiado!";
+        button.style.backgroundColor = "#4caf50";
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.backgroundColor = "#f44336";
+        }, 2000);
+      }
+    }
     }
   </script>
 </body>

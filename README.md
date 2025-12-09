@@ -85,7 +85,10 @@ Reemplaza `tu-app` con el nombre de tu aplicación en Railway.
 
 ### Cómo Depurar
 
-1. **Frontend**: Abre la consola del navegador (F12) para ver errores de JavaScript
+1. **Frontend**:
+   - Los errores ahora se muestran en la página web en un contenedor rojo copiable
+   - Usa el botón "Copiar Error" para copiar toda la información técnica
+   - Abre la consola del navegador (F12) para ver logs adicionales de JavaScript
 2. **Backend**: Los logs del servidor se muestran en la terminal donde corre la aplicación
 3. **PayPhone**: Verifica en el panel de desarrolladores que las credenciales sean correctas
 
