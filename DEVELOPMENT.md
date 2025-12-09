@@ -33,26 +33,52 @@ Este documento contiene toda la información técnica, errores, debugging y conf
 
 ---
 
-## ⚠️ CONFIGURACIÓN CRÍTICA: CUENTA COMERCIAL PAYPHONE
+## 🚨 **PROBLEMA ACTUAL: PERMISOS DE APLICACIÓN**
 
-### 🏪 ¿Quién Cobra el Dinero?
-
-**RESPUESTA IMPORTANTE**: Para RECIBIR pagos, el **CONDOMINIO debe tener una cuenta COMERCIAL en PayPhone**.
-
-#### Flujo de Dinero:
+### **Nuevo Error:**
 ```
-Cliente paga con tarjeta → PayPhone procesa → Dinero va a CUENTA BANCARIA del CONDOMINIO
-
-💰 Cliente: Pierde $50/$100 (cargo a su tarjeta)
-💳 PayPhone: Cobra comisión (~2-3%)
-🏦 Condominio: Recibe $48.50-$97 (depósito automático)
+"Su aplicación no esta autorizada para acceder a este recurso.
+Verifique que el token este bien copiado o a que recursos puede acceder su tipo de aplicación."
 ```
 
-#### Requisitos para Cobrar:
-1. **Registrar como COMERCIO** en PayPhone (no como cliente individual)
-2. **Configurar cuenta bancaria** para recibir depósitos
-3. **Obtener credenciales API** (Client ID, Secret, Token)
-4. **Configurar establecimiento** con datos del condominio
+### **¿Qué significa esto?**
+
+**El Store ID es válido** ✅ (ya no dice "tienda no existe")
+**El token funciona** ✅ (autenticación exitosa)
+**Pero faltan PERMISOS** ❌ (no puede crear transacciones)
+
+### **Análisis del problema:**
+
+#### **Tipo de Aplicación: "Web"**
+- ✅ Puede autenticarse
+- ❌ **NO tiene permisos** para crear ventas (`/api/Sale`)
+
+#### **Probadores: 0**
+- ❌ **Sin probadores configurados**
+- ❌ Aplicación Web en "modo prueba" pero sin usuarios autorizados
+
+### **¿Por qué ocurre?**
+
+1. **Aplicación Web** necesita probadores para funcionar
+2. **Sin probadores** = aplicación sin permisos de producción
+3. **Token válido** pero restringido por configuración
+
+### **Soluciones posibles:**
+
+#### **Opción 1: Configurar Probadores (Recomendado)**
+1. Ir a panel PayPhone → "Probadores"
+2. Agregar números de teléfono autorizados
+3. Usar esos números para pruebas
+
+#### **Opción 2: Cambiar Tipo de Aplicación**
+- Cambiar de "Web" a "Producción"
+- Activar permisos completos
+- Requiere verificación PayPhone
+
+#### **Opción 3: Contactar PayPhone**
+- Solicitar activación de permisos
+- Explicar caso de uso (kiosko condominio)
+- Pedir configuración especial
 
 ### 📞 Número de Teléfono del Establecimiento
 
