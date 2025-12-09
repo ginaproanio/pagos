@@ -83,19 +83,41 @@
           if (data.details.status) {
             errorMsg += `Status: ${data.details.status}\n`;
           }
+          if (data.details.payphoneErrorCode) {
+            errorMsg += `Código PayPhone: ${data.details.payphoneErrorCode}\n`;
+          }
+          if (data.details.category) {
+            errorMsg += `Categoría: ${data.details.category}\n`;
+          }
           if (data.details.data) {
             errorMsg += `Respuesta: ${JSON.stringify(data.details.data, null, 2)}\n`;
           }
           if (data.details.message) {
             errorMsg += `Mensaje: ${data.details.message}\n`;
           }
+          if (data.details.duration) {
+            errorMsg += `Duración: ${data.details.duration}\n`;
+          }
+          if (data.details.requestId) {
+            errorMsg += `Request ID: ${data.details.requestId}\n`;
+          }
           errorMsg += `\nTimestamp: ${data.timestamp}`;
+
+          // Agregar soluciones si están disponibles
+          if (data.details.solutions && data.details.solutions.length > 0) {
+            errorMsg += `\n\n💡 Soluciones sugeridas:\n`;
+            data.details.solutions.forEach((solution, index) => {
+              errorMsg += `${index + 1}. ${solution}\n`;
+            });
+          }
         }
 
         showError(errorMsg);
         console.error("Error completo:", data);
         document.getElementById("loading").style.display = "none";
       }
+    }
+
     function showError(errorMessage) {
       document.getElementById("error-content").textContent = errorMessage;
       document.getElementById("error-container").style.display = "block";
@@ -120,24 +142,37 @@
           button.style.backgroundColor = "#f44336";
         }, 2000);
       } catch (err) {
-        // Fallback para navegadores antiguos
-        const textArea = document.createElement("textarea");
-        textArea.value = errorText;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textArea);
+        console.warn("Clipboard API no disponible, usando fallback:", err);
+        // Fallback para navegadores antiguos o contextos no seguros
+        try {
+          const textArea = document.createElement("textarea");
+          textArea.value = errorText;
+          textArea.style.position = "fixed";
+          textArea.style.left = "-999999px";
+          textArea.style.top = "-999999px";
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
 
-        const button = document.getElementById("copy-error");
-        const originalText = button.textContent;
-        button.textContent = "¡Copiado!";
-        button.style.backgroundColor = "#4caf50";
-        setTimeout(() => {
-          button.textContent = originalText;
-          button.style.backgroundColor = "#f44336";
-        }, 2000);
+          if (document.execCommand("copy")) {
+            const button = document.getElementById("copy-error");
+            const originalText = button.textContent;
+            button.textContent = "¡Copiado!";
+            button.style.backgroundColor = "#4caf50";
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.style.backgroundColor = "#f44336";
+            }, 2000);
+          } else {
+            alert("No se pudo copiar el error. Copia manualmente el texto mostrado.");
+          }
+
+          document.body.removeChild(textArea);
+        } catch (fallbackErr) {
+          console.error("Error en fallback de copia:", fallbackErr);
+          alert("Error al copiar. Selecciona y copia manualmente el texto del error.");
+        }
       }
-    }
     }
   </script>
 </body>
