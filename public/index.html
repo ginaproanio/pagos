@@ -38,7 +38,24 @@
         // Redirige a la pasarela de PayPhone
         window.location.href = data.paymentUrl;
       } else {
-        alert("Error: " + data.message);
+        // Mostrar error detallado
+        let errorMsg = "Error: " + data.message;
+        if (data.details) {
+          errorMsg += "\n\nDetalles técnicos:\n";
+          if (data.details.status) {
+            errorMsg += `Status: ${data.details.status}\n`;
+          }
+          if (data.details.data) {
+            errorMsg += `Respuesta: ${JSON.stringify(data.details.data, null, 2)}\n`;
+          }
+          if (data.details.message) {
+            errorMsg += `Mensaje: ${data.details.message}\n`;
+          }
+          errorMsg += `\nTimestamp: ${data.timestamp}`;
+        }
+
+        alert(errorMsg);
+        console.error("Error completo:", data);
         document.getElementById("loading").style.display = "none";
       }
     }

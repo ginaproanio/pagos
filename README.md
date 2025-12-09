@@ -63,6 +63,55 @@ Reemplaza `tu-app` con el nombre de tu aplicación en Railway.
 3. Serás redirigido a la pasarela de PayPhone.
 4. Después del pago, volverás a la página de confirmación.
 
+## Debugging y Troubleshooting
+
+### Errores Comunes
+
+**Error: "Error al crear pago"**
+- **Causa**: Problema con la integración de PayPhone
+- **Solución**: Revisa la consola del navegador y los logs del servidor
+- **Información detallada**: El sistema ahora muestra errores detallados incluyendo:
+  - Código de status HTTP
+  - Respuesta completa del servidor PayPhone
+  - Timestamp del error
+
+**Error: "No se pudo conectar con PayPhone"**
+- **Causa**: Problemas de conectividad o servidor PayPhone caído
+- **Solución**: Verifica conexión a internet y estado de PayPhone
+
+**Error: "Error interno: [mensaje]"**
+- **Causa**: Error en el código del servidor
+- **Solución**: Revisa logs del servidor y configuración
+
+### Cómo Depurar
+
+1. **Frontend**: Abre la consola del navegador (F12) para ver errores de JavaScript
+2. **Backend**: Los logs del servidor se muestran en la terminal donde corre la aplicación
+3. **PayPhone**: Verifica en el panel de desarrolladores que las credenciales sean correctas
+
+### Logs Importantes
+
+El servidor registra información detallada de errores:
+- Error completo del objeto
+- Respuesta del servidor PayPhone
+- Status HTTP
+- Headers de respuesta
+- Timestamp
+
+### Variables de Entorno
+
+Asegúrate de que estas variables estén correctamente configuradas:
+- `PAYPHONE_CLIENT_ID`: ID del cliente de PayPhone
+- `PAYPHONE_SECRET`: Clave secreta
+- `PAYPHONE_ENCODE_PASS`: Contraseña de codificación
+- `PAYPHONE_TOKEN`: Token de autenticación
+
+### URLs de Respuesta
+
+Después del despliegue en Railway, actualiza estas URLs en `server.js`:
+- `responseUrl`: URL de confirmación
+- `cancelUrl`: URL de cancelación
+
 ## Tecnologías
 
 - Node.js

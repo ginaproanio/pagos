@@ -57,8 +57,38 @@ app.post('/crear-pago', async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error.response?.data || error.message);
-    res.status(500).json({ success: false, message: "Error al crear pago" });
+    console.error('Error completo:', error);
+    console.error('Respuesta del servidor:', error.response?.data);
+    console.error('Status:', error.response?.status);
+    console.error('Headers:', error.response?.headers);
+
+    let errorMessage = "Error al crear pago";
+    let errorDetails = {};
+
+    if (error.response) {
+      // El servidor respondió con un código de error
+      errorMessage = `Error del servidor PayPhone: ${error.response.status}`;
+      errorDetails = {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data
+      };
+    } else if (error.request) {
+      // La petición fue hecha pero no hubo respuesta
+      errorMessage = "No se pudo conectar con PayPhone";
+      errorDetails = { message: "Sin respuesta del servidor" };
+    } else {
+      // Algo pasó al configurar la petición
+      errorMessage = `Error interno: ${error.message}`;
+      errorDetails = { message: error.message };
+    }
+
+    res.status(500).json({
+      success: false,
+      message: errorMessage,
+      details: errorDetails,
+      timestamp: new Date().toISOString()
+    });
   }
 });
 
