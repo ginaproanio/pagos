@@ -2,6 +2,37 @@
 
 Este documento contiene toda la información técnica, errores, debugging y configuración detallada para el desarrollo e integración con PayPhone.
 
+## 🚨 **PROBLEMA ACTUAL - ¡BLOQUEADO!**
+
+### **Error Actual en Producción:**
+```
+"La tienda asociada no existe. Verifique su store id o comuníquese con Payphone"
+```
+
+### **¿Por qué ocurre esto?**
+- ❌ Estás usando **credenciales de DEMO/PRUEBA** que NO corresponden a una tienda real
+- ❌ El **Store ID `1711274975001`** es de pruebas, NO existe en PayPhone
+- ❌ Para cobrar dinero real, necesitas **cuenta COMERCIAL REAL**
+
+### **¿Qué necesitas hacer?**
+
+#### **INMEDIATAMENTE:**
+1. **Crear cuenta COMERCIAL** en PayPhone (como condominio)
+2. **Obtener credenciales REALES** (Client ID, Secret, Token, Store ID)
+3. **Configurar cuenta bancaria** para recibir depósitos
+4. **Registrar teléfono `0998842547`** como contacto del comercio
+
+#### **Para pruebas:**
+- Registrar `0998842547` como "probador" en PayPhone
+- O usar teléfono del comercio para validación
+
+### **Analogía de Restaurante:**
+> "Es como querer cobrar en un restaurante pero usando credenciales de un local que no existe. El cliente llega, pide la cuenta, pero el POS no reconoce la tienda."
+
+**SIN CUENTA COMERCIAL REAL → NO PUEDES COBRAR**
+
+---
+
 ## ⚠️ CONFIGURACIÓN CRÍTICA: CUENTA COMERCIAL PAYPHONE
 
 ### 🏪 ¿Quién Cobra el Dinero?
@@ -31,6 +62,10 @@ Cliente paga con tarjeta → PayPhone procesa → Dinero va a CUENTA BANCARIA de
 - **Tipo**: Teléfono del establecimiento/comercio
 - **Propósito**: Contacto administrativo, NO para pagos
 - **Uso**: Notificaciones, soporte, verificación
+
+#### **IMPORTANTE para pruebas:**
+- Para **SANDBOX**: Registrar `0998842547` como "probador"
+- Para **PRODUCCIÓN**: Solo configurar como teléfono de contacto
 
 ### 🏦 Proceso de Registro como Comercio:
 
