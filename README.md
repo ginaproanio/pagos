@@ -29,7 +29,8 @@ Este módulo permite procesar pagos automáticos basados en criterios específic
 
 ### Requisitos
 - Node.js v18+
-- Cuenta PayPhone con credenciales
+- **Cuenta COMERCIAL PayPhone** (registro como establecimiento)
+- Cuenta bancaria configurada para recibir depósitos
 - Conexión a internet
 
 ### Instalación Local

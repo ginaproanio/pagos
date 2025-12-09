@@ -2,16 +2,89 @@
 
 Este documento contiene toda la información técnica, errores, debugging y configuración detallada para el desarrollo e integración con PayPhone.
 
-## Variables de Entorno
+## ⚠️ CONFIGURACIÓN CRÍTICA: CUENTA COMERCIAL PAYPHONE
 
-**IMPORTANTE**: Estas variables contienen información sensible. Nunca las subas al repositorio público.
+### 🏪 ¿Quién Cobra el Dinero?
+
+**RESPUESTA IMPORTANTE**: Para RECIBIR pagos, el **CONDOMINIO debe tener una cuenta COMERCIAL en PayPhone**.
+
+#### Flujo de Dinero:
+```
+Cliente paga con tarjeta → PayPhone procesa → Dinero va a CUENTA BANCARIA del CONDOMINIO
+
+💰 Cliente: Pierde $50/$100 (cargo a su tarjeta)
+💳 PayPhone: Cobra comisión (~2-3%)
+🏦 Condominio: Recibe $48.50-$97 (depósito automático)
+```
+
+#### Requisitos para Cobrar:
+1. **Registrar como COMERCIO** en PayPhone (no como cliente individual)
+2. **Configurar cuenta bancaria** para recibir depósitos
+3. **Obtener credenciales API** (Client ID, Secret, Token)
+4. **Configurar establecimiento** con datos del condominio
+
+### 📞 Número de Teléfono del Establecimiento
+
+**Tu caso específico**: Número `0998842547` debe configurarse como **teléfono de contacto del comercio**, NO como probador.
+
+#### Configuración requerida:
+- **Tipo**: Teléfono del establecimiento/comercio
+- **Propósito**: Contacto administrativo, NO para pagos
+- **Uso**: Notificaciones, soporte, verificación
+
+### 🏦 Proceso de Registro como Comercio:
+
+#### **Paso 1: Crear Cuenta Comercial**
+- Ir a https://payphone.app/ (o contactar a PayPhone)
+- Registrar como **"Comercio/Empresa"** (NO como persona individual)
+- Proporcionar RUC del condominio
+- Verificar documentación legal
+
+#### **Paso 2: Configurar Cuenta Bancaria**
+- En panel PayPhone: Configurar cuenta bancaria del condominio
+- PayPhone depositará fondos automáticamente después de cada pago
+- Configurar frecuencia de depósitos (diario, semanal, etc.)
+
+#### **Paso 3: Obtener Credenciales API**
+- En panel PayPhone: Generar API credentials
+- Obtener Client ID, Secret y Token
+- Configurar en variables de entorno
+
+#### **Paso 4: Configurar Establecimiento**
+- **Razón social**: Nombre del condominio
+- **RUC**: Número de registro del condominio
+- **Dirección**: Ubicación del condominio
+- **Teléfono de contacto**: `0998842547`
+- **Correo electrónico**: Email administrativo
+
+### 💰 ¿Cómo Funciona el Cobro?
+
+1. **Cliente paga** en kiosko con tarjeta
+2. **PayPhone procesa** el pago (verifica tarjeta con banco)
+3. **PayPhone cobra comisión** por el servicio
+4. **PayPhone deposita** el monto neto en cuenta bancaria del condominio
+5. **Condominio recibe** notificación del depósito
+
+### 📊 Ejemplo de Transacción:
+
+```
+Cliente paga: $50.00
+Comisión PayPhone: $1.50 (3%)
+Monto neto al condominio: $48.50
+Depósito automático en cuenta bancaria del condominio
+```
+
+### 🔐 Variables de Entorno
+
+**IMPORTANTE**: Estas contienen credenciales de TU cuenta comercial. Nunca las subas al repositorio.
 
 ```env
 PORT=3000
-PAYPHONE_CLIENT_ID=wbMFPpdK8EuioYnLZcLvw
-PAYPHONE_SECRET=Dj0kiMVN3UGYvHIRhzNWyg
-PAYPHONE_ENCODE_PASS=1ec58fe5c20e46d6929d122d3874e745
-PAYPHONE_TOKEN=KwZnR4t6DGcgq_8XkME9dMVVtCIUnLOCFPLGLRHA1f_pPvXf8nhvxwtTceVyfK-sD95m6koyd1vvu-rYcDWmKqjAcE2zc2lt9LGqElXwuEmMlrIWEa64PELeQuL4D3t4Iwr2eRrbcqFuhga5n35Gijjuwex6qyoJM7o88emSEsBluZk33W437uUJhVjybA7gRVHsx0wWLdbs7QfVH6o2I0EWwnHVM3Crx7EZziB_g8ueHGi3vkElz52GyMuHCKhfyTa78oh_kvyti36GNm7wXm1H-gVBk7Wz6I4uctjPQywMAfe77eOxgidGVcRBQQljrOCGnA
+# Credenciales de TU cuenta COMERCIAL en PayPhone
+PAYPHONE_CLIENT_ID=tu_client_id_de_payphone
+PAYPHONE_SECRET=tu_secret_de_payphone
+PAYPHONE_ENCODE_PASS=tu_encode_pass_de_payphone
+PAYPHONE_TOKEN=tu_token_de_payphone
 ```
 
 ## Configuración Técnica
