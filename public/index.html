@@ -76,44 +76,59 @@
         // Redirige a la pasarela de PayPhone
         window.location.href = data.paymentUrl;
       } else {
-        // Mostrar error detallado en la página
-        let errorMsg = "Error: " + data.message;
-        if (data.details) {
-          errorMsg += "\n\nDetalles técnicos:\n";
-          if (data.details.status) {
-            errorMsg += `Status: ${data.details.status}\n`;
-          }
-          if (data.details.payphoneErrorCode) {
-            errorMsg += `Código PayPhone: ${data.details.payphoneErrorCode}\n`;
-          }
-          if (data.details.category) {
-            errorMsg += `Categoría: ${data.details.category}\n`;
-          }
-          if (data.details.data) {
-            errorMsg += `Respuesta: ${JSON.stringify(data.details.data, null, 2)}\n`;
-          }
-          if (data.details.message) {
-            errorMsg += `Mensaje: ${data.details.message}\n`;
-          }
-          if (data.details.duration) {
-            errorMsg += `Duración: ${data.details.duration}\n`;
-          }
-          if (data.details.requestId) {
-            errorMsg += `Request ID: ${data.details.requestId}\n`;
-          }
-          errorMsg += `\nTimestamp: ${data.timestamp}`;
+        // Mostrar TODA la información cruda de PayPhone (sin filtrar)
+        let errorMsg = "🚨 ERROR COMPLETO PAYPHONE - EVALUACIÓN TÉCNICA\n";
+        errorMsg += "=".repeat(60) + "\n\n";
 
-          // Agregar soluciones si están disponibles
-          if (data.details.solutions && data.details.solutions.length > 0) {
-            errorMsg += `\n\n💡 Soluciones sugeridas:\n`;
-            data.details.solutions.forEach((solution, index) => {
-              errorMsg += `${index + 1}. ${solution}\n`;
-            });
-          }
+        // Información principal
+        errorMsg += `📝 MENSAJE: ${data.message}\n`;
+        errorMsg += `🕒 TIMESTAMP: ${data.timestamp}\n\n`;
+
+        // TODOS los detalles técnicos sin filtrar
+        if (data.details) {
+          errorMsg += "🔍 DETALLES TÉCNICOS COMPLETOS:\n";
+          errorMsg += "-".repeat(40) + "\n";
+
+          // Mostrar TODOS los campos de details
+          Object.keys(data.details).forEach(key => {
+            const value = data.details[key];
+            if (value !== null && value !== undefined) {
+              if (typeof value === 'object') {
+                errorMsg += `${key.toUpperCase()}:\n${JSON.stringify(value, null, 2)}\n`;
+              } else {
+                errorMsg += `${key.toUpperCase()}: ${value}\n`;
+              }
+            }
+          });
+          errorMsg += "\n";
         }
 
+        // Información CRUDA del error (toda la respuesta del backend)
+        errorMsg += "📊 RESPUESTA COMPLETA DEL BACKEND:\n";
+        errorMsg += "-".repeat(40) + "\n";
+        errorMsg += JSON.stringify(data, null, 2) + "\n\n";
+
+        // Información adicional para evaluación técnica
+        errorMsg += "🧪 INFORMACIÓN PARA EVALUACIÓN TÉCNICA:\n";
+        errorMsg += "-".repeat(40) + "\n";
+        errorMsg += `Navegador: ${navigator.userAgent}\n`;
+        errorMsg += `URL actual: ${window.location.href}\n`;
+        errorMsg += `Timestamp local: ${new Date().toISOString()}\n\n`;
+
+        // Sugerencias de análisis
+        errorMsg += "💡 ANÁLISIS RECOMENDADO:\n";
+        errorMsg += "-".repeat(40) + "\n";
+        errorMsg += "• Revisar logs del servidor para información completa\n";
+        errorMsg += "• Verificar configuración de PayPhone\n";
+        errorMsg += "• Validar conectividad de red\n";
+        errorMsg += "• Comparar con documentación oficial de PayPhone\n\n";
+
+        // Nota importante
+        errorMsg += "⚠️ IMPORTANTE: Esta información completa es para evaluación técnica\n";
+        errorMsg += "   del módulo PayPhone antes de integración al sistema principal.\n";
+
         showError(errorMsg);
-        console.error("Error completo:", data);
+        console.error("ERROR COMPLETO PAYPHONE:", data);
         document.getElementById("loading").style.display = "none";
       }
     }

@@ -360,18 +360,46 @@ app.post('/crear-pago', async (req, res) => {
       solutions = ['Revisar configuración del servidor', 'Verificar variables de entorno'];
     }
 
-    // Respuesta al cliente con información detallada pero segura
+    // Respuesta al cliente con TODA la información cruda de PayPhone (sin filtrar)
     const clientResponse = {
       success: false,
       message: errorMessage,
-      timestamp: errorTimestamp, // Timestamp en el nivel superior para el frontend
+      timestamp: errorTimestamp,
+      // Información completa del error (para evaluación técnica)
+      rawError: {
+        axios: axiosErrorInfo,
+        request: requestDebugInfo,
+        response: error.response ? {
+          status: error.response.status,
+          statusText: error.response.statusText,
+          headers: error.response.headers,
+          data: error.response.data
+        } : null,
+        network: error.request ? {
+          sent: true,
+          timeout: error.code === 'ECONNABORTED',
+          code: error.code
+        } : null
+      },
+      // Detalles procesados (compatibilidad)
       details: {
         requestId: requestDebugInfo.requestId,
         category: errorCategory,
         payphoneErrorCode: payphoneErrorCode,
         status: statusCode,
         duration: `${requestDuration}ms`,
-        solutions: solutions
+        solutions: solutions,
+        // Incluir TODA la respuesta cruda de PayPhone
+        payphoneResponse: error.response?.data || null,
+        httpStatus: error.response?.status || null,
+        httpHeaders: error.response?.headers || null
+      },
+      // Información del entorno (para debugging)
+      environment: {
+        serverTime: errorTimestamp,
+        requestDuration: requestDuration,
+        memoryUsage: environmentInfo.memory,
+        nodeVersion: environmentInfo.nodeVersion
       }
     };
 
