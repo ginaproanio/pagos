@@ -165,6 +165,7 @@ app.post('/crear-pago', async (req, res) => {
 
     // Sistema de documentación EXHAUSTIVA de errores PayPhone
     const payphoneErrorCodes = {
+      // Errores HTTP de PayPhone
       800: {
         category: 'VALIDATION_ERROR',
         description: 'Validaciones fallidas',
@@ -202,6 +203,19 @@ app.post('/crear-pago', async (req, res) => {
         description: 'Error interno del servidor PayPhone',
         solutions: ['Reintentar más tarde', 'Verificar estado de servicios PayPhone'],
         retry: 'EXPONENTIAL_BACKOFF'
+      },
+      // Errores de red y sistema (no HTTP de PayPhone)
+      'NETWORK_ERROR': {
+        category: 'NETWORK_ERROR',
+        description: 'Sin conexión al servidor PayPhone',
+        solutions: ['Verificar conexión a internet', 'Revisar configuración de red', 'Intentar más tarde'],
+        causes: ['Problemas de conectividad', 'Firewall bloqueando', 'DNS no resuelve', 'Servidor PayPhone caído']
+      },
+      'INTERNAL_ERROR': {
+        category: 'INTERNAL_ERROR',
+        description: 'Error interno del sistema',
+        solutions: ['Revisar configuración del servidor', 'Verificar variables de entorno', 'Consultar logs del sistema'],
+        causes: ['Variables de entorno faltantes', 'Configuración incorrecta', 'Errores de código']
       }
     };
 
@@ -315,20 +329,49 @@ app.post('/crear-pago', async (req, res) => {
       console.error('⚠️ Error al documentar:', docError.message);
     }
 
+    // Determinar el tipo de error y construir respuesta consistente
+    let errorMessage = "Error al crear pago";
+    let errorCategory = 'UNKNOWN_ERROR';
+    let payphoneErrorCode = null;
+    let statusCode = null;
+    let solutions = [];
+
+    if (error.response) {
+      // Error con respuesta del servidor
+      statusCode = error.response.status;
+      payphoneErrorCode = error.response.data?.errorCode;
+      errorCategory = payphoneErrorCodes[payphoneErrorCode]?.category || 'UNKNOWN_ERROR';
+      solutions = payphoneErrorCodes[payphoneErrorCode]?.solutions || [];
+
+      if (payphoneErrorCode && payphoneErrorCodes[payphoneErrorCode]) {
+        errorMessage = `Error PayPhone (${payphoneErrorCode}): ${payphoneErrorCodes[payphoneErrorCode].description}`;
+      } else {
+        errorMessage = `Error del servidor PayPhone: ${statusCode}`;
+      }
+    } else if (error.request) {
+      // Error de red - sin respuesta del servidor
+      errorMessage = "Error del servidor PayPhone: Sin conexión";
+      errorCategory = 'NETWORK_ERROR';
+      solutions = ['Verificar conexión a internet', 'Intentar más tarde'];
+    } else {
+      // Error interno
+      errorMessage = `Error interno: ${error.message}`;
+      errorCategory = 'INTERNAL_ERROR';
+      solutions = ['Revisar configuración del servidor', 'Verificar variables de entorno'];
+    }
+
     // Respuesta al cliente con información detallada pero segura
     const clientResponse = {
       success: false,
-      message: error.response?.data?.errorCode
-        ? `Error PayPhone (${error.response.data.errorCode}): ${payphoneErrorCodes[error.response.data.errorCode]?.description || 'Error desconocido'}`
-        : `Error del servidor PayPhone: ${error.response?.status || 'Sin conexión'}`,
+      message: errorMessage,
+      timestamp: errorTimestamp, // Timestamp en el nivel superior para el frontend
       details: {
-        timestamp: errorTimestamp,
         requestId: requestDebugInfo.requestId,
-        category: payphoneErrorCodes[error.response?.data?.errorCode]?.category || 'UNKNOWN_ERROR',
-        payphoneErrorCode: error.response?.data?.errorCode,
-        status: error.response?.status,
+        category: errorCategory,
+        payphoneErrorCode: payphoneErrorCode,
+        status: statusCode,
         duration: `${requestDuration}ms`,
-        solutions: payphoneErrorCodes[error.response?.data?.errorCode]?.solutions || []
+        solutions: solutions
       }
     };
 

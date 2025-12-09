@@ -128,13 +128,25 @@ Este error ocurre en la fase de **creación de transacción** (`/api/Sale`), no 
 - Revisar configuración de firewall
 - Confirmar DNS de pay.payphonetodoesposible.com
 
+##### NETWORK_ERROR (Categoría: Error de red)
+###### Sin respuesta del servidor
+**Mensaje**: "Error del servidor PayPhone: Sin conexión"
+**Causa**: Problemas de conectividad, firewall o DNS
+**Solución**:
+- Verificar conexión a internet
+- Revisar configuración de red/firewall
+- Intentar más tarde (puede ser temporal)
+- Confirmar que pay.payphonetodoesposible.com esté accesible
+
 ##### INTERNAL_ERROR (Categoría: Error interno)
 ###### Error de configuración local
+**Mensaje**: "Error interno: [mensaje específico]"
 **Causa**: Problemas en el código del servidor local
 **Solución**:
 - Revisar logs del servidor
 - Verificar variables de entorno
 - Validar formato de datos enviados
+- Revisar configuración de la aplicación
 
 #### Errores de Gateway (502/503/504)
 **Causa**: Problemas de infraestructura de PayPhone
